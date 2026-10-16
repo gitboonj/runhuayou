@@ -1,0 +1,1044 @@
+/* =========================================================
+   全站样式表  style.css
+   所有页面共用这一个文件。想改颜色，只需修改下面 :root 里的变量。
+   ========================================================= */
+
+/* ---------- 1. 颜色与基础变量 ---------- */
+:root {
+  --color-primary: #0b3d6e;      /* 主色：深蓝，体现专业感 */
+  --color-primary-dark: #072a4d; /* 主色加深，用于悬停 */
+  --color-accent: #f2a900;       /* 强调色：润滑油常见的琥珀金 */
+  --color-text: #1f2933;         /* 正文文字颜色 */
+  --color-muted: #5f6b7a;        /* 次要文字颜色 */
+  --color-bg: #ffffff;           /* 页面背景 */
+  --color-bg-soft: #f4f6f9;      /* 浅灰背景，用于区块交替 */
+  --color-border: #dde3ea;       /* 边框颜色 */
+  --radius: 8px;                 /* 圆角大小 */
+  --shadow: 0 4px 16px rgba(11, 61, 110, 0.08); /* 卡片阴影 */
+  --max-width: 1180px;           /* 内容最大宽度 */
+}
+
+/* ---------- 2. 基础重置 ---------- */
+* {
+  box-sizing: border-box; /* 让宽度计算包含内边距和边框，布局更直观 */
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth; /* 页面内跳转时平滑滚动 */
+}
+
+body {
+  font-family: "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: var(--color-text);
+  background: var(--color-bg);
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+img,
+svg {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+ul {
+  list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.25;
+  color: var(--color-primary);
+}
+
+/* 内容容器：限制最大宽度并居中，左右留 16px 边距（手机端也适用） */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* ---------- 3. 按钮 ---------- */
+.btn {
+  display: inline-block;
+  padding: 12px 26px;
+  border-radius: var(--radius);
+  font-weight: 600;
+  border: 2px solid transparent;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.btn:hover {
+  text-decoration: none;
+}
+
+/* 实心主按钮 */
+.btn-primary {
+  background: var(--color-accent);
+  color: #1a1a1a;
+}
+
+.btn-primary:hover {
+  background: #d99700;
+}
+
+/* 描边按钮（用在深色背景上） */
+.btn-outline {
+  border-color: #ffffff;
+  color: #ffffff;
+}
+
+.btn-outline:hover {
+  background: #ffffff;
+  color: var(--color-primary);
+}
+
+/* 深蓝色按钮（用在浅色背景上） */
+.btn-dark {
+  background: var(--color-primary);
+  color: #ffffff;
+}
+
+.btn-dark:hover {
+  background: var(--color-primary-dark);
+}
+
+/* ---------- 4. 顶部信息条 ---------- */
+.topbar {
+  background: var(--color-primary-dark);
+  color: #c9d6e3;
+  font-size: 13px;
+  padding: 6px 0;
+}
+
+.topbar .container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+}
+
+.topbar a {
+  color: #c9d6e3;
+}
+
+/* ---------- 5. 导航栏 ---------- */
+.site-header {
+  background: #ffffff;
+  border-bottom: 1px solid var(--color-border);
+  position: sticky; /* 滚动时导航固定在顶部 */
+  top: 0;
+  z-index: 100;
+}
+
+.site-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+}
+
+/* Logo：文字 + 一个油滴图标 */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 20px;
+  color: var(--color-primary);
+  letter-spacing: 0.5px;
+}
+
+.logo:hover {
+  text-decoration: none;
+}
+
+.logo span {
+  color: var(--color-accent);
+}
+
+.logo-icon {
+  width: 34px;
+  height: 34px;
+}
+
+/* 主导航菜单 */
+.main-nav ul {
+  display: flex;
+  gap: 28px;
+}
+
+.main-nav a {
+  color: var(--color-text);
+  font-weight: 500;
+  padding: 6px 0;
+  border-bottom: 2px solid transparent;
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-accent);
+  text-decoration: none;
+}
+
+/* 手机端的“汉堡菜单”按钮，电脑端默认隐藏 */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--color-primary);
+  margin: 5px 0;
+}
+
+/* ---------- 6. 首页大横幅 Hero ---------- */
+.hero {
+  background: linear-gradient(120deg, rgba(7, 42, 77, 0.95), rgba(11, 61, 110, 0.85)),
+    radial-gradient(circle at 80% 30%, #f2a900 0%, transparent 45%);
+  color: #ffffff;
+  padding: 90px 0;
+}
+
+.hero .container {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.hero h1 {
+  color: #ffffff;
+  font-size: 44px;
+  margin-bottom: 18px;
+}
+
+.hero p {
+  font-size: 18px;
+  color: #d5e0ec;
+  margin-bottom: 30px;
+  max-width: 560px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.hero-visual {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  align-items: flex-end;
+}
+
+.hero-visual svg {
+  width: 30%;
+  max-width: 130px;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.35));
+}
+
+/* ---------- 7. 内页标题横幅 ---------- */
+.page-banner {
+  background: linear-gradient(120deg, var(--color-primary-dark), var(--color-primary));
+  color: #ffffff;
+  padding: 56px 0;
+}
+
+.page-banner h1 {
+  color: #ffffff;
+  font-size: 36px;
+  margin-bottom: 8px;
+}
+
+.page-banner p {
+  color: #c9d6e3;
+}
+
+/* 面包屑导航：Home / Products / ... */
+.breadcrumb {
+  font-size: 14px;
+  color: #c9d6e3;
+  margin-bottom: 10px;
+}
+
+.breadcrumb a {
+  color: #ffffff;
+}
+
+/* ---------- 8. 通用区块 ---------- */
+.section {
+  padding: 72px 0;
+}
+
+.section-soft {
+  background: var(--color-bg-soft);
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 44px;
+}
+
+.section-title h2 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.section-title p {
+  color: var(--color-muted);
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* 自适应网格：根据屏幕宽度自动决定每行几列 */
+.grid {
+  display: grid;
+  gap: 24px;
+}
+
+.grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* ---------- 9. 卡片 ---------- */
+.card {
+  background: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 28px;
+  box-shadow: var(--shadow);
+}
+
+.card h3 {
+  font-size: 19px;
+  margin-bottom: 10px;
+}
+
+.card p {
+  color: var(--color-muted);
+  font-size: 15px;
+}
+
+/* 优势卡片上方的圆形图标 */
+.icon-circle {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: rgba(242, 169, 0, 0.15);
+  color: var(--color-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.icon-circle svg {
+  width: 26px;
+  height: 26px;
+}
+
+/* ---------- 10. 产品卡片 ---------- */
+.product-card {
+  background: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(11, 61, 110, 0.14);
+}
+
+/* 产品图片区域（这里用 SVG 画的油桶代替真实照片） */
+.product-image {
+  background: linear-gradient(180deg, #eef2f7, #dfe6ee);
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-image svg {
+  height: 170px;
+  width: auto;
+}
+
+.product-info {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.product-category {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-accent);
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.product-info h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.product-info p {
+  color: var(--color-muted);
+  font-size: 14px;
+  margin-bottom: 14px;
+  flex: 1;
+}
+
+/* 小标签，例如 5W-30、API SP */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.tag {
+  background: var(--color-bg-soft);
+  border: 1px solid var(--color-border);
+  font-size: 12px;
+  padding: 2px 10px;
+  border-radius: 20px;
+  color: var(--color-primary);
+}
+
+.product-link {
+  font-weight: 600;
+}
+
+/* 产品分类筛选按钮 */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 36px;
+}
+
+.filter-btn {
+  background: #ffffff;
+  border: 1px solid var(--color-border);
+  padding: 8px 18px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--color-text);
+}
+
+.filter-btn:hover {
+  border-color: var(--color-primary);
+}
+
+.filter-btn.active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #ffffff;
+}
+
+/* ---------- 11. 产品详情页 ---------- */
+.detail-top {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.detail-image {
+  background: linear-gradient(180deg, #eef2f7, #dfe6ee);
+  border-radius: var(--radius);
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.detail-image svg {
+  height: 320px;
+  width: auto;
+}
+
+.detail-info h1 {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+
+.detail-info .lead {
+  color: var(--color-muted);
+  margin-bottom: 20px;
+}
+
+.detail-info h3 {
+  font-size: 17px;
+  margin: 22px 0 10px;
+}
+
+/* 带对勾的列表 */
+.check-list li {
+  position: relative;
+  padding-left: 26px;
+  margin-bottom: 8px;
+}
+
+.check-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+.detail-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+}
+
+/* 技术参数表格 */
+.table-wrap {
+  overflow-x: auto; /* 手机上表格太宽时可左右滑动，而不是撑破页面 */
+}
+
+.spec-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  min-width: 480px;
+}
+
+.spec-table th,
+.spec-table td {
+  text-align: left;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 15px;
+}
+
+.spec-table thead th {
+  background: var(--color-primary);
+  color: #ffffff;
+}
+
+.spec-table tbody tr:nth-child(even) {
+  background: var(--color-bg-soft);
+}
+
+.detail-columns {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 36px;
+}
+
+/* 允许网格里的内容缩小，否则宽表格会把整个页面撑宽（手机上出现横向滚动） */
+.detail-top > div,
+.detail-columns > div {
+  min-width: 0;
+}
+
+.detail-columns h2 {
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+/* ---------- 12. 关于我们 ---------- */
+.about-intro {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.about-intro h2 {
+  font-size: 30px;
+  margin-bottom: 16px;
+}
+
+.about-intro p {
+  color: var(--color-muted);
+  margin-bottom: 14px;
+}
+
+.about-visual {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  border-radius: var(--radius);
+  padding: 40px;
+  color: #ffffff;
+}
+
+.about-visual h3 {
+  color: var(--color-accent);
+  margin-bottom: 14px;
+}
+
+.about-visual li {
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* 数字统计区 */
+.stats {
+  background: var(--color-primary);
+  color: #ffffff;
+  padding: 56px 0;
+}
+
+.stats .grid {
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 40px;
+  font-weight: 800;
+  color: var(--color-accent);
+}
+
+.stat-label {
+  color: #c9d6e3;
+  font-size: 15px;
+}
+
+/* 发展历程时间线 */
+.timeline {
+  max-width: 760px;
+  margin: 0 auto;
+  border-left: 3px solid var(--color-accent);
+  padding-left: 28px;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -37px;
+  top: 4px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 3px solid var(--color-accent);
+}
+
+.timeline-year {
+  font-weight: 800;
+  color: var(--color-primary);
+  font-size: 18px;
+}
+
+.timeline-item p {
+  color: var(--color-muted);
+}
+
+/* 资质证书 */
+.cert {
+  text-align: center;
+}
+
+.cert-badge {
+  width: 90px;
+  height: 90px;
+  margin: 0 auto 14px;
+  border-radius: 50%;
+  border: 3px solid var(--color-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  color: var(--color-primary);
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+/* ---------- 13. 联系我们 ---------- */
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.contact-info h2 {
+  font-size: 26px;
+  margin-bottom: 14px;
+}
+
+.contact-info > p {
+  color: var(--color-muted);
+  margin-bottom: 24px;
+}
+
+.contact-item {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.contact-item .icon-circle {
+  flex-shrink: 0;
+  margin-bottom: 0;
+  width: 46px;
+  height: 46px;
+}
+
+.contact-item strong {
+  display: block;
+  color: var(--color-primary);
+}
+
+.contact-item span,
+.contact-item a {
+  color: var(--color-muted);
+  word-break: break-word;
+}
+
+/* 询盘表单 */
+.inquiry-form h2 {
+  font-size: 24px;
+  margin-bottom: 6px;
+}
+
+.inquiry-form > p {
+  color: var(--color-muted);
+  margin-bottom: 22px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+/* 必填项后面的红色星号 */
+.required {
+  color: #d64545;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  font-size: 16px; /* 16px 可避免 iPhone 输入时自动放大页面 */
+  font-family: inherit;
+  background: #ffffff;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(11, 61, 110, 0.12);
+}
+
+.form-group textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+/* 校验失败时的样式 */
+.form-group.has-error input,
+.form-group.has-error textarea {
+  border-color: #d64545;
+}
+
+.error-text {
+  color: #d64545;
+  font-size: 13px;
+  margin-top: 4px;
+  display: none;
+}
+
+.form-group.has-error .error-text {
+  display: block;
+}
+
+/* 提交后的提示框 */
+.form-message {
+  display: none;
+  padding: 14px 16px;
+  border-radius: var(--radius);
+  margin-bottom: 18px;
+  font-size: 15px;
+}
+
+.form-message.success {
+  display: block;
+  background: #e7f6ec;
+  color: #1e6b3a;
+  border: 1px solid #b7e2c4;
+}
+
+.form-message.error {
+  display: block;
+  background: #fdecec;
+  color: #a12f2f;
+  border: 1px solid #f3c0c0;
+}
+
+/* ---------- 14. 行动号召区 CTA ---------- */
+.cta {
+  background: linear-gradient(120deg, var(--color-primary-dark), var(--color-primary));
+  color: #ffffff;
+  text-align: center;
+  padding: 64px 0;
+}
+
+.cta h2 {
+  color: #ffffff;
+  font-size: 30px;
+  margin-bottom: 12px;
+}
+
+.cta p {
+  color: #c9d6e3;
+  margin-bottom: 26px;
+}
+
+/* ---------- 15. 页脚 ---------- */
+.site-footer {
+  background: #0a1a2b;
+  color: #9fb0c3;
+  padding: 56px 0 0;
+  font-size: 14px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1.3fr;
+  gap: 32px;
+}
+
+.site-footer h4 {
+  color: #ffffff;
+  font-size: 16px;
+  margin-bottom: 14px;
+}
+
+.site-footer a {
+  color: #9fb0c3;
+}
+
+.site-footer a:hover {
+  color: #ffffff;
+}
+
+.site-footer li {
+  margin-bottom: 8px;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  margin-top: 40px;
+  padding: 18px 0;
+  text-align: center;
+  font-size: 13px;
+}
+
+/* ---------- 16. WhatsApp 悬浮按钮 ---------- */
+.whatsapp-float {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #25d366;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  z-index: 200;
+}
+
+.whatsapp-float svg {
+  width: 30px;
+  height: 30px;
+}
+
+/* =========================================================
+   17. 响应式：针对平板和手机的调整
+   @media 的意思是“当屏幕宽度小于某个值时，使用下面的样式”
+   ========================================================= */
+
+/* 平板（宽度 ≤ 960px） */
+@media (max-width: 960px) {
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hero .container,
+  .detail-top,
+  .detail-columns,
+  .about-intro,
+  .contact-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-visual {
+    display: none; /* 平板和手机上隐藏首页插画，让文字更突出 */
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* 手机（宽度 ≤ 760px） */
+@media (max-width: 760px) {
+  /* 显示汉堡按钮 */
+  .nav-toggle {
+    display: block;
+  }
+
+  /* 菜单默认收起，点击汉堡按钮后加上 .open 类再展开 */
+  .main-nav {
+    display: none;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    border-bottom: 1px solid var(--color-border);
+    box-shadow: var(--shadow);
+  }
+
+  .main-nav.open {
+    display: block;
+  }
+
+  .main-nav ul {
+    flex-direction: column;
+    gap: 0;
+    padding: 8px 16px;
+  }
+
+  .main-nav li a {
+    display: block;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .main-nav li:last-child a {
+    border-bottom: none;
+  }
+
+  .topbar .hide-mobile {
+    display: none;
+  }
+
+  .hero {
+    padding: 60px 0;
+  }
+
+  .hero h1 {
+    font-size: 30px;
+  }
+
+  .hero p {
+    font-size: 16px;
+  }
+
+  .page-banner {
+    padding: 40px 0;
+  }
+
+  .page-banner h1 {
+    font-size: 28px;
+  }
+
+  .section {
+    padding: 52px 0;
+  }
+
+  .section-title h2 {
+    font-size: 26px;
+  }
+
+  .grid-3,
+  .grid-4,
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  /* 统计数字在手机上保持两列，更紧凑 */
+  .stats .grid-4 {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .stat-number {
+    font-size: 30px;
+  }
+
+  .detail-image svg {
+    height: 240px;
+  }
+
+  .detail-info h1 {
+    font-size: 26px;
+  }
+
+  .card {
+    padding: 22px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+}
